@@ -1,7 +1,25 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
 
-import {ReactInstance} from 'react-360-web';
+import {ReactInstance, Surface} from 'react-360-web';
+
+import data from './spreadsheetdata'
+
+const spreadSheetSurface1 = new Surface(
+    450, //
+    600, // height
+    Surface.SurfaceShape.Flat //
+);
+const spreadSheetSurface2 = new Surface(
+    450, //
+    600, // height
+    Surface.SurfaceShape.Flat //
+);
+const spreadSheetSurface3 = new Surface(
+    450, //
+    600, // height
+    Surface.SurfaceShape.Flat //
+);
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
@@ -10,14 +28,39 @@ function init(bundle, parent, options = {}) {
     ...options,
   });
 
+  spreadSheetSurface1.setAngle(-0.8, 0);
+  spreadSheetSurface2.setAngle(0, 0);
+  spreadSheetSurface3.setAngle(0.8, 0);
   // Render your app content to the default cylinder surface
+  const s = r360.getDefaultSurface();
+  s.resize(0, 0);
+
   r360.renderToSurface(
-    r360.createRoot('react_360_demo', { /* initial props */ }),
-    r360.getDefaultSurface()
+      r360.createRoot('react360visualization'),
+      s,
+      'default' // optional, a name to reference the surface
   );
 
+
+
+  r360.renderToSurface(
+      r360.createRoot('react360visualization', {data: data.offices}),
+      spreadSheetSurface1,
+      'flat_spreadSheetSurface1' // optional, a name to reference the surface
+  );
+    r360.renderToSurface(
+        r360.createRoot('react360visualization', {data: data.basic}),
+        spreadSheetSurface2,
+        'flat_spreadSheetSurface2' // optional, a name to reference the surface
+    );
+    r360.renderToSurface(
+        r360.createRoot('react360visualization', {data: data.persons}),
+        spreadSheetSurface3,
+        'flat_spreadSheetSurface3' // optional, a name to reference the surface
+    );
+
   // Load the initial environment
-  r360.compositor.setBackground(r360.getAssetURL('360_world.jpg'));
+  r360.compositor.setBackground(r360.getAssetURL('OfficeBackground.jpg'));
 }
 
 window.React360 = {init};

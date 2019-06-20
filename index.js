@@ -5,27 +5,36 @@ import {
   Text,
   View,
 } from 'react-360';
+import Spreadsheet from "./spreadsheet";
 
-export default class react_360_demo extends React.Component {
+export default class react360visualization extends React.Component {
   render() {
     return (
       <View style={styles.panel}>
-        <View style={styles.greetingBox}>
-          <Text style={styles.greeting}>
-            Welcome to React 360
-          </Text>
-        </View>
+        <Spreadsheet data = {this.props.data}/>
       </View>
     );
   }
 };
 
+/*export default class Spreadsheet3D extends React.Component {
+  render() {
+    return (
+        <View style={styles.panel}>
+          <Text style={styles.greeting}>
+            <Spreadsheet/>
+          </Text>
+        </View>
+    );
+  }
+};*/
+
 const styles = StyleSheet.create({
   panel: {
     // Fill the entire surface
-    width: 1000,
+    width: 600,
     height: 600,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -36,8 +45,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   greeting: {
-    fontSize: 30,
+    fontSize: 16,
   },
 });
 
-AppRegistry.registerComponent('react_360_demo', () => react_360_demo);
+AppRegistry.registerComponent('react360visualization', () => react360visualization);
+// AppRegistry.registerComponent('spreadsheet', () => Spreadsheet3D);
